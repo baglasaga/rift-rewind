@@ -1,0 +1,108 @@
+import {MBTI_LETTERS, MBTI_TYPES, MBTILetter, MBTIType} from "@/constants/mbti";
+import {Slider} from "@/components/ui/slider";
+import {Tilt_Neon} from "next/font/google";
+
+const tiltNeon = Tilt_Neon({ subsets: ['latin'] });
+
+type Data = {
+    polarity: any
+    type: MBTIType
+}
+
+export default function DashboardDetails() {
+    const data: Data = {
+        polarity: {
+            energy: 30,
+            infoStyle: 20,
+            decisionMaking: 40,
+            lifeStyle: 30
+        },
+        type: 'ENFP'
+    }
+
+    return (
+        <div className="w-full h-full pt-16 px-24 pb-32 flex">
+            <div className="space-y-24">
+                <div className={`${tiltNeon.className} text-[var(--text)] space-y-10`}>
+                    <div className="flex gap-3">
+                        {data.type.split('').map((char, index) => {
+                            const letter = char as MBTILetter;
+                            return (
+                                <div key={letter} className="flex gap-1 items-center">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-[var(--text)]" />
+                                    <div className="leading-tight">{MBTI_LETTERS[letter]}</div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                    <div className="text-8xl">
+                        {data.type}
+                    </div>
+                    <div className="text-lg">
+                        {MBTI_TYPES[data.type].description}
+                    </div>
+                </div>
+                <div className="text-[var(--text)] md:px-12 lg:px-24 space-y-16">
+                    <div>
+                        <div className={`${tiltNeon.className} text-lg`}>Analysis:</div>
+                        <div className="text-sm">{MBTI_TYPES[data.type].analysis}</div>
+                    </div>
+                    <div className={`${tiltNeon.className} space-y-4`}>
+                        <div className="text-lg">Polarity:</div>
+                        <div className="flex flex-col gap-16 items-center justify-center">
+                            <div className="space-y-3 w-3/5">
+                                <div>Extroversion/Introversion</div>
+                                <div className="flex gap-5">
+                                    <div>E</div>
+                                    <Slider
+                                        disabled
+                                        defaultValue={[data.polarity.energy]}
+                                        max={100}
+                                    />
+                                    <div>I</div>
+                                </div>
+                            </div>
+                            <div className="space-y-3 w-3/5">
+                                <div>Intuition/Sensing</div>
+                                <div className="flex gap-5">
+                                    <div>N</div>
+                                    <Slider
+                                        disabled
+                                        defaultValue={[data.polarity.infoStyle]}
+                                        max={100}
+                                    />
+                                    <div>S</div>
+                                </div>
+                            </div>
+                            <div className="space-y-3 w-3/5">
+                                <div>Feeling/Thinking</div>
+                                <div className="flex gap-5">
+                                    <div>F</div>
+                                    <Slider
+                                        disabled
+                                        defaultValue={[data.polarity.decisionMaking]}
+                                        max={100}
+                                    />
+                                    <div>T</div>
+                                </div>
+                            </div>
+                            <div className="space-y-3 w-3/5">
+                                <div>Perceiving/Judging</div>
+                                <div className="flex gap-5">
+                                    <div>P</div>
+                                    <Slider
+                                        disabled
+                                        defaultValue={[data.polarity.lifeStyle]}
+                                        max={100}
+                                    />
+                                    <div>J</div>
+                                </div>
+                            </div>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
