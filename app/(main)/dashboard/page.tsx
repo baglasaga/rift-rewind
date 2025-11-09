@@ -1,14 +1,22 @@
 "use client"
 
-import {Button} from "@/components/ui/button";
-import {ArrowRight} from "lucide-react";
-import {Tilt_Neon} from "next/font/google";
-import {useRouter} from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import { Tilt_Neon } from "next/font/google";
+import { useRouter } from "next/navigation";
+import { useMBTI } from "@/components/MBTIContext";
 
 const tiltNeon = Tilt_Neon({ subsets: ['latin'] });
 
 export default function Dashboard() {
     const router = useRouter();
+    const { setStarted, setMbti } = useMBTI();
+
+    const handleSauce = () => {
+        setStarted(true);
+        setMbti(null);
+        router.push("/dashboard/details");
+    };
 
     return (
         <div className="w-full h-full flex justify-center items-center">
