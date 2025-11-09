@@ -9,7 +9,7 @@ type Data = {
     type: MBTIType
 }
 
-export default function DashboardDetails() {
+export default function SauceDetails() {
     const data: Data = {
         polarity: {
             energy: 30,

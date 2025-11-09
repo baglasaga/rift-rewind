@@ -82,7 +82,9 @@
   --dark-1: #21363F;
   --dark-2: #11252E;
   --medium: #146176;
-  --light: #12AAC1
+  --light: #12AAC1;
+
+  --dashboard-card: rgba(20, 97, 118, 0.29);
 }
 
 .dark {

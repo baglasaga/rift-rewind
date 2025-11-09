@@ -26,7 +26,7 @@ export default function Home() {
                                 <Label htmlFor="gameName">Game Name</Label>
                                 <Input
                                     id="gameName"
-                                    placeholder="idk..."
+                                    placeholder="Game Name"
                                     className="bg-[var(--dark)] border-1 border-[#12AAC1] placeholder:text-[#146176]"/>
                             </div>
                             <div className="flex flex-col gap-2 w-[400px]">
@@ -42,7 +42,7 @@ export default function Home() {
                                 <Button
                                     type="button"
                                     className={"bg-[var(--light)] px-4 py-2 rounded-lg hover:cursor-pointer hover:bg-[var(--light)]"}
-                                    onClick={() => router.push('/dashboard')}
+                                    onClick={() => router.push('/sauce')}
                                 >
                                     Login
                                     <ArrowRight />
