@@ -1,6 +1,8 @@
+"use client"
+
 import Image from "next/image";
-import {useState} from "react";
-import {TRAITS} from '@/constants/trait';
+import { useState } from "react";
+import { TRAITS } from '@/constants/trait';
 
 type TraitIconProps = {
     name: string

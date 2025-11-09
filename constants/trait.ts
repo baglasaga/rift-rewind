@@ -1,3 +1,19 @@
 export const TRAITS = [
-    {name: 'Monkey D. Luffy', image: '', description: ''}
-]
+    { name: "Kill Securer", image: "", description: "" },
+    { name: "The Conqueror", image: "", description: "" },
+    { name: "Glass Cannon", image: "", description: "" },
+    { name: "The Warden", image: "", description: "" },
+    { name: "Yuumi’s Yuumi", image: "", description: "" },
+    { name: "Pocket Support", image: "", description: "" },
+    { name: "Retail Therapy", image: "", description: "" },
+    { name: "Cash Cow", image: "", description: "" },
+    { name: "KDA Player", image: "", description: "" },
+    { name: "The One-Trick Pony", image: "", description: "" },
+    { name: "Flex Master", image: "", description: "" },
+    { name: "Singleplayer Only", image: "", description: "" },
+    { name: "Potential Man", image: "", description: "" },
+    { name: "Snowball Fighter", image: "", description: "" },
+    { name: "The Staller Supreme", image: "", description: "" },
+    { name: "Monkey D. Luffy", image: "", description: "" },
+    { name: "Rage Quitter", image: "", description: "" },
+];

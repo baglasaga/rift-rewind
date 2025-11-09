@@ -1,6 +1,7 @@
-import {MBTI_LETTERS, MBTI_TYPES, MBTILetter, MBTIType} from "@/constants/mbti";
-import {Slider} from "@/components/ui/slider";
-import {Tilt_Neon} from "next/font/google";
+import { MBTI_INFO, MBTI_TYPES, MBTILetter, MBTIType } from "@/constants/mbti";
+import { Slider } from "@/components/ui/slider";
+import { Tilt_Neon } from "next/font/google";
+import TraitIcon from "@/components/trait-icon";
 
 const tiltNeon = Tilt_Neon({ subsets: ['latin'] });
 
@@ -30,7 +31,7 @@ export default function SauceDetails() {
                             return (
                                 <div key={letter} className="flex gap-1 items-center">
                                     <div className="w-1.5 h-1.5 rounded-full bg-[var(--text)]" />
-                                    <div className="leading-tight">{MBTI_LETTERS[letter]}</div>
+                                    <div className="leading-tight">{MBTI_INFO[letter].label}</div>
                                 </div>
                             )
                         })}
@@ -45,7 +46,74 @@ export default function SauceDetails() {
                 <div className="text-[var(--text)] md:px-12 lg:px-24 space-y-16">
                     <div>
                         <div className={`${tiltNeon.className} text-lg`}>Analysis:</div>
+                        <div className={`${tiltNeon.className} text-lg`}>Overview:</div>
                         <div className="text-sm">{MBTI_TYPES[data.type].analysis}</div>
+                    </div>
+                    <div>
+                        <div className={`${tiltNeon.className} text-lg`}>Breakdown:</div>
+                        <div>
+                            {/* Attitude */}
+                            <div>
+                                <div className={`${tiltNeon.className} text-lg`}>
+                                    Attitude: {MBTI_INFO[data.type[0] as MBTILetter].label}
+                                </div>
+                                <div className="text-sm">
+                                    {MBTI_INFO[data.type[0] as MBTILetter].description}
+                                </div>
+                                <div className="text-sm mb-1">Related Traits:</div>
+                                <div className="flex flex-row gap-2">
+                                    {MBTI_INFO[data.type[0] as MBTILetter].traits.map(name => (
+                                        <TraitIcon key={name} name={name} />
+                                    ))}
+                                </div>
+                            </div>
+                            {/* Function - Perception */}
+                            <div>
+                                <div className={`${tiltNeon.className} text-lg`}>
+                                    Function - Perception: {MBTI_INFO[data.type[1] as MBTILetter].label}
+                                </div>
+                                <div className="text-sm">
+                                    {MBTI_INFO[data.type[1] as MBTILetter].description}
+                                </div>
+                                <div className="text-sm mb-1">Related Traits:</div>
+                                <div className="flex flex-row gap-2">
+                                    {MBTI_INFO[data.type[1] as MBTILetter].traits.map(name => (
+                                        <TraitIcon key={name} name={name} />
+                                    ))}
+                                </div>
+                            </div>
+                            {/* Function - Judgement */}
+                            <div>
+                                <div className={`${tiltNeon.className} text-lg`}>
+                                    Function - Judgement: {MBTI_INFO[data.type[2] as MBTILetter].label}
+                                </div>
+                                <div className="text-sm">
+                                    {MBTI_INFO[data.type[2] as MBTILetter].description}
+                                </div>
+                                <div className="text-sm mb-1">Related Traits:</div>
+                                <div className="flex flex-row gap-2">
+                                    {MBTI_INFO[data.type[2] as MBTILetter].traits.map(name => (
+                                        <TraitIcon key={name} name={name} />
+                                    ))}
+                                </div>
+                            </div>
+                            {/* Lifestyle */}
+                            <div>
+                                <div className={`${tiltNeon.className} text-lg`}>
+                                    Lifestyle: {MBTI_INFO[data.type[3] as MBTILetter].label}
+                                </div>
+                                <div className="text-sm">
+                                    {MBTI_INFO[data.type[3] as MBTILetter].description}
+                                </div>
+                                <div className="text-sm mb-1">Related Traits:</div>
+                                <div className="flex flex-row gap-2">
+                                    {MBTI_INFO[data.type[3] as MBTILetter].traits.map(name => (
+                                        <TraitIcon key={name} name={name} />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div className={`${tiltNeon.className} space-y-4`}>
                         <div className="text-lg">Polarity:</div>
@@ -99,7 +167,7 @@ export default function SauceDetails() {
                                 </div>
                             </div>
 
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>

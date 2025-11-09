@@ -1,26 +1,15 @@
 export type MBTILetter = 'E' | 'I' | 'S' | 'N' | 'T' | 'F' | 'J' | 'P';
 export type MBTIType = 'ENFP';
 
-export const MBTI_LETTERS: Record<MBTILetter, string> = {
-    E: 'Extroversion',
-    I: 'Introversion',
-    S: 'Sensing',
-    N: 'Intuition',
-    T: 'Thinking',
-    F: 'Feeling',
-    J: 'Judging',
-    P: 'Perceiving',
-};
-
-export const MBTI_DESCRIPTIONS: Record<MBTILetter, string> = {
-    E: '',
-    I: '',
-    S: '',
-    N: '',
-    T: '',
-    F: '',
-    J: '',
-    P: '',
+export const MBTI_INFO: Record<MBTILetter, { label: string; description: string; traits: string[] }> = {
+    E: { label: 'Extroversion', description: 'text', traits: ['Kill Securer', 'The Conqueror', 'Glass Cannon'] },
+    I: { label: 'Introversion', description: 'text', traits: ['The Warden', "Yuumi’s Yuumi", 'Pocket Support'] },
+    S: { label: 'Sensing', description: 'text', traits: ['Retail Therapy', 'Cash Cow', 'KDA Player'] },
+    N: { label: 'Intuition', description: 'text', traits: ['The One-Trick Pony', 'Flex Master', 'Singleplayer Only'] },
+    T: { label: 'Thinking', description: 'text', traits: ['Potential Man', 'The Conqueror', 'Snowball Fighter'] },
+    F: { label: 'Feeling', description: 'text', traits: ['Pocket Support', "Yuumi’s Yuumi", 'The Warden'] },
+    J: { label: 'Judging', description: 'text', traits: ['The One-Trick Pony', 'Retail Therapy', 'The Staller Supreme'] },
+    P: { label: 'Perceiving', description: 'text', traits: ['Monkey D. Luffy', 'Glass Cannon', 'Rage Quitter'] },
 };
 
 export const MBTI_TYPES: Record<MBTIType, any> = {
