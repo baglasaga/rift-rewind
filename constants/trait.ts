@@ -1,7 +1,7 @@
 export const TRAITS = [
     { name: "Kill Securer", image: "/images/kill-securer.jpg", description: "" },
     { name: "The Conqueror", image: "/images/conquer.jpg", description: "" },
-    { name: "Glass Cannon", image: "/images/glass-cannon.webp", description: "" },
+    { name: "Glass Cannon", image: "/images/glass-cannon.jpg", description: "" },
     { name: "The Warden", image: "/images/ward.png", description: "" },
     { name: "Yuumi’s Yuumi", image: "/images/yuumi.jpg", description: "" },
     { name: "Pocket Support", image: "/images/pocket-support.jpg", description: "" },

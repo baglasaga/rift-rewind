@@ -16,9 +16,9 @@ export default function TraitIcon({ name }: TraitIconProps) {
 
     if (!src) {
         return (
-            <div className="flex flex-col justify-center items-center text-white gap-2">
+            <div className="flex flex-col justify-center items-center text-white gap-2 my-4">
                 <div
-                    className="w-[64px] h-[64px] bg-white"
+                    className="w-[72px] h-[72px] bg-white"
                 />
                 <div>{trait?.name}</div>
             </div>
@@ -26,12 +26,12 @@ export default function TraitIcon({ name }: TraitIconProps) {
         );
     } else {
         return (
-            <div>
+            <div className="flex flex-col justify-center items-center text-white gap-2 my-4">
                 <Image
                     src={src}
                     alt={name}
-                    width={64}
-                    height={64}
+                    width={72}
+                    height={72}
                     onError={() => setHasError(true)}
                 />
                 <div>{trait?.name}</div>

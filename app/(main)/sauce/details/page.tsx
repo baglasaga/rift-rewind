@@ -43,40 +43,40 @@ export default function SauceDetails() {
                         {MBTI_TYPES[data.type].description}
                     </div>
                 </div>
-                <div className="text-[var(--text)] md:px-12 lg:px-24 space-y-16">
+                <div className="text-[var(--text)] md:px-8 lg:px-16 space-y-8">
                     <div>
-                        <div className={`${tiltNeon.className} text-lg`}>Analysis:</div>
-                        <div className={`${tiltNeon.className} text-lg`}>Overview:</div>
+                        <div className={`${tiltNeon.className} text-xl font-semibold mb-5`}>Analysis:</div>
+                        <div className={`${tiltNeon.className} text-lg font-semibold`}>Overview:</div>
                         <div className="text-sm">{MBTI_TYPES[data.type].analysis}</div>
                     </div>
                     <div>
-                        <div className={`${tiltNeon.className} text-lg`}>Breakdown:</div>
-                        <div>
+                        <div className={`${tiltNeon.className} text-xl font-semibold`}>Breakdown:</div>
+                        <div className="p-8">
                             {/* Attitude */}
                             <div>
                                 <div className={`${tiltNeon.className} text-lg`}>
-                                    Attitude: {MBTI_INFO[data.type[0] as MBTILetter].label}
+                                    <span className="font-semibold"> Attitude: </span>  {MBTI_INFO[data.type[0] as MBTILetter].label}
                                 </div>
                                 <div className="text-sm">
                                     {MBTI_INFO[data.type[0] as MBTILetter].description}
                                 </div>
-                                <div className="text-sm mb-1">Related Traits:</div>
-                                <div className="flex flex-row gap-2">
+                                <div className="grid grid-cols-4">
+                                    <div className="text-lg font-semibold">Related Traits:</div>
                                     {MBTI_INFO[data.type[0] as MBTILetter].traits.map(name => (
-                                        <TraitIcon key={name} name={name} />
+                                        <TraitIcon name={name} key={name} />
                                     ))}
                                 </div>
                             </div>
                             {/* Function - Perception */}
                             <div>
                                 <div className={`${tiltNeon.className} text-lg`}>
-                                    Function - Perception: {MBTI_INFO[data.type[1] as MBTILetter].label}
+                                    <span className="font-semibold">Function - Perception:</span> {MBTI_INFO[data.type[1] as MBTILetter].label}
                                 </div>
                                 <div className="text-sm">
                                     {MBTI_INFO[data.type[1] as MBTILetter].description}
                                 </div>
-                                <div className="text-sm mb-1">Related Traits:</div>
-                                <div className="flex flex-row gap-2">
+                                <div className="grid grid-cols-4">
+                                    <div className="text-lg font-semibold">Related Traits:</div>
                                     {MBTI_INFO[data.type[1] as MBTILetter].traits.map(name => (
                                         <TraitIcon key={name} name={name} />
                                     ))}
@@ -85,13 +85,13 @@ export default function SauceDetails() {
                             {/* Function - Judgement */}
                             <div>
                                 <div className={`${tiltNeon.className} text-lg`}>
-                                    Function - Judgement: {MBTI_INFO[data.type[2] as MBTILetter].label}
+                                    <span className="font-semibold">Function - Judgement:</span> {MBTI_INFO[data.type[2] as MBTILetter].label}
                                 </div>
                                 <div className="text-sm">
                                     {MBTI_INFO[data.type[2] as MBTILetter].description}
                                 </div>
-                                <div className="text-sm mb-1">Related Traits:</div>
-                                <div className="flex flex-row gap-2">
+                                <div className="grid grid-cols-4">
+                                    <div className="text-lg font-semibold">Related Traits:</div>
                                     {MBTI_INFO[data.type[2] as MBTILetter].traits.map(name => (
                                         <TraitIcon key={name} name={name} />
                                     ))}
@@ -100,13 +100,13 @@ export default function SauceDetails() {
                             {/* Lifestyle */}
                             <div>
                                 <div className={`${tiltNeon.className} text-lg`}>
-                                    Lifestyle: {MBTI_INFO[data.type[3] as MBTILetter].label}
+                                    <span className="font-semibold">Lifestyle:</span> {MBTI_INFO[data.type[3] as MBTILetter].label}
                                 </div>
                                 <div className="text-sm">
                                     {MBTI_INFO[data.type[3] as MBTILetter].description}
                                 </div>
-                                <div className="text-sm mb-1">Related Traits:</div>
-                                <div className="flex flex-row gap-2">
+                                <div className="grid grid-cols-4">
+                                    <div className="text-lg font-semibold">Related Traits:</div>
                                     {MBTI_INFO[data.type[3] as MBTILetter].traits.map(name => (
                                         <TraitIcon key={name} name={name} />
                                     ))}
