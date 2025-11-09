@@ -12,6 +12,17 @@ export const MBTI_LETTERS: Record<MBTILetter, string> = {
     P: 'Perceiving',
 };
 
+export const MBTI_DESCRIPTIONS: Record<MBTILetter, string> = {
+    E: '',
+    I: '',
+    S: '',
+    N: '',
+    T: '',
+    F: '',
+    J: '',
+    P: '',
+};
+
 export const MBTI_TYPES: Record<MBTIType, any> = {
     ENFP: {
         description: 'ENFPs are enthusiastic, fun, and lively. Having an ENFP on the team will guarantee you keep playing even after a 10x losing streak.',
