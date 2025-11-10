@@ -2,15 +2,48 @@ export type MBTILetter = 'E' | 'I' | 'S' | 'N' | 'T' | 'F' | 'J' | 'P';
 export type MBTIType = 'ENFP';
 
 export const MBTI_INFO: Record<MBTILetter, { label: string; description: string; traits: string[] }> = {
-    E: { label: 'Extroversion', description: 'text', traits: ['Kill Securer', 'The Conqueror', 'Glass Cannon'] },
-    I: { label: 'Introversion', description: 'text', traits: ['The Warden', "Yuumi’s Yuumi", 'Pocket Support'] },
-    S: { label: 'Sensing', description: 'text', traits: ['Retail Therapy', 'Cash Cow', 'KDA Player'] },
-    N: { label: 'Intuition', description: 'text', traits: ['The One-Trick Pony', 'Flex Master', 'Singleplayer Only'] },
-    T: { label: 'Thinking', description: 'text', traits: ['Potential Man', 'The Conqueror', 'Snowball Fighter'] },
-    F: { label: 'Feeling', description: 'text', traits: ['Pocket Support', "Yuumi’s Yuumi", 'The Warden'] },
-    J: { label: 'Judging', description: 'text', traits: ['The One-Trick Pony', 'Retail Therapy', 'The Staller Supreme'] },
-    P: { label: 'Perceiving', description: 'text', traits: ['Monkey D. Luffy', 'Glass Cannon', 'Rage Quitter'] },
+    E: { 
+        label: 'Extroversion', 
+        description: 'Outgoing and action-oriented players who thrive in the heat of battle. They seek kills, push objectives, and love the spotlight, often swinging hard and leading fights.', 
+        traits: ['Kill Securer', 'The Conqueror', 'Glass Cannon'] 
+    },
+    I: { 
+        label: 'Introversion', 
+        description: 'Observant and supportive players who prefer strategic influence over direct confrontation. They excel at vision, shielding allies, and quietly controlling the flow of the game.', 
+        traits: ['The Warden', "Yuumi’s Yuumi", 'Pocket Support'] 
+    },
+    S: { 
+        label: 'Sensing', 
+        description: 'Practical and detail-focused players who excel at farming, managing resources, and keeping track of concrete in-game metrics. They play efficiently and maximize tangible results.', 
+        traits: ['Generational Wealth', 'Cash Cow', 'KDA Player'] 
+    },
+    N: { 
+        label: 'Intuition', 
+        description: 'Creative and adaptable players who enjoy variety, experimentation, and unconventional strategies. They may focus on a single champion or flex across many roles, exploring possibilities.', 
+        traits: ['The One-Trick Pony', 'Flex Master', 'Singleplayer Only'] 
+    },
+    T: { 
+        label: 'Thinking', 
+        description: 'Strategic and analytical players who focus on performance and objective impact. They often prioritize high damage, efficient kills, and calculated risks over purely social or emotional play.', 
+        traits: ['Potential Man', 'The Conqueror', 'Snowball Fighter'] 
+    },
+    F: { 
+        label: 'Feeling', 
+        description: 'Empathetic and team-oriented players who prioritize supporting allies, keeping teammates alive, and contributing to the overall team experience rather than just personal stats.', 
+        traits: ['Pocket Support', "Yuumi’s Yuumi", 'The Warden'] 
+    },
+    J: { 
+        label: 'Judging', 
+        description: 'Organized and goal-focused players who plan their approach and stick to their strategies. They excel at focused mastery, predictable play, and long-term objectives in matches.', 
+        traits: ['The One-Trick Pony', 'Retail Therapy', 'The Staller Supreme'] 
+    },
+    P: { 
+        label: 'Perceiving', 
+        description: 'Flexible and spontaneous players who thrive in chaotic situations. They adapt on the fly, take risks, enjoy variety, and often prioritize immediate gains and fun over strict planning.', 
+        traits: ['Monkey D. Luffy', 'Glass Cannon', 'Rage Quitter'] 
+    },
 };
+
 
 export const MBTI_TYPES: Record<MBTIType, any> = {
     ENFP: {
