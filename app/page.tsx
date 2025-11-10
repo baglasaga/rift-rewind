@@ -26,6 +26,7 @@ export default function Home() {
         const res = await dataService.getUser(data.gameName, data.tagLine);
         try {
             const userData = await dataService.getUserData(res.batch_id, res.puuid);
+            console.log('setting mbti: ', userData)
             setMbti(userData);
             router.push('/sauce')
         } catch (err) {

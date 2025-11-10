@@ -38,7 +38,6 @@ export default function Dashboard() {
         );
     };
 
-    // clankered
     const kills_each_day = mbti?.features.kills_each_day;
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const monthlyData: Record<string, number> = {};
@@ -54,13 +53,6 @@ export default function Dashboard() {
 
     // Convert to array suitable for line chart
     const lineChartData = Object.entries(monthlyData).map(([month, value]) => ({ month, value }));
-
-    // const lineChartData = [
-    //     { month: 'Jan', value: 10 },
-    //     { month: 'Apr', value: 20 },
-    //     { month: 'Jul', value: 60 },
-    //     { month: 'Oct', value: 30 },
-    // ];
 
     const peak = lineChartData.reduce((max, item) => (item.value > max.value ? item : max), lineChartData[0]);
 
@@ -180,11 +172,11 @@ export default function Dashboard() {
                     </div>
                     <div className="bg-[var(--dark)] text-white text-lg gap-4 p-8 rounded-lg flex flex-col justify-center items-center">
                         <div>Total Stolen Objectives:</div>
-                        <div>182</div>
+                        <div>{mbti?.features.extra_data.total_objectives_stolen}</div>
                     </div>
                     <div className="bg-[var(--dark)] text-white text-lg gap-4 p-8 rounded-lg flex flex-col justify-center items-center">
                         <div>Total Stolen Assists:</div>
-                        <div>182</div>
+                        <div>{mbti?.features.extra_data.total_objectives_stolen_assists}</div>
                     </div>
                 </div>
             </div>
