@@ -4,6 +4,8 @@ import Image from "next/image";
 import {PieChart, Pie, Legend, Cell, PieLabelRenderProps, LineChart, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, Line, ReferenceLine} from 'recharts';
 import {Tilt_Neon} from "next/font/google";
 import { useMBTI } from "@/components/MBTIContext";
+import {DynamicIcon} from "lucide-react/dynamic";
+import {ROLES} from "@/constants/role-mapping";
 
 const tiltNeon = Tilt_Neon({ subsets: ['latin'] });
 
@@ -119,9 +121,11 @@ export default function Dashboard() {
                     <div className="bg-[var(--dark)] text-white p-8 rounded-lg">
                         <div className="text-lg mb-2">Most Played Role:</div>
                         <div className="h-full flex flex-col items-center gap-3 justify-center">
-                            <Image src="https://github.com/shadcn.png" alt="@shadcn" className="border-2 border-[var(--light)] rounded-lg" width={120} height={120}/>
+                            <div className="border-2 border-[var(--light)] rounded-lg w-[120px] h-[120px] flex justify-center items-center">
+                                <DynamicIcon name={ROLES[mbti['features']['most_played_role']].icon} size={100} strokeWidth={1} fill={"var(--light)"}/>
+                            </div>
                             <div className="font-bold">{mbti['features']['most_played_role']}</div>
-                            <div className="text-sm">{"<insert sentence about the role!>"}</div>
+                            <div className="text-sm text-center">{ROLES[mbti['features']['most_played_role']].description}</div>
                         </div>
                     </div>
                     <div className="grid grid-cols-1 grid-rows-2 gap-2">
