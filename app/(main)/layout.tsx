@@ -9,11 +9,9 @@ export default function MainLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <MBTIProvider>
-            <div className="flex min-h-screen w-full bg-[var(--dark)]">
-                <AppSidebar />
-                <main className="grow p-6">{children}</main>
-            </div>
-        </MBTIProvider>
+        <div className="flex min-h-screen w-full bg-[var(--dark)]">
+            <AppSidebar />
+            <main className="grow p-6">{children}</main>
+        </div>
     );
 }
