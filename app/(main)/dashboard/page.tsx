@@ -3,15 +3,25 @@
 import Image from "next/image";
 import {PieChart, Pie, Legend, Cell, PieLabelRenderProps, LineChart, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, Line, ReferenceLine} from 'recharts';
 import {Tilt_Neon} from "next/font/google";
+import { useMBTI } from "@/components/MBTIContext";
 
 const tiltNeon = Tilt_Neon({ subsets: ['latin'] });
 
 
 export default function Dashboard() {
-    const data = [
-        { name: 'Won', value: 65 },
-        { name: 'Lost', value: 35 },
+    const { mbti } = useMBTI()
+    // console.log(mbti['features']['total_wins'])
+    // console.log(mbti['features']['total_losses'])
+
+    // const data = [
+    //     { name: 'Won', value: mbti['features']['total_wins'] },
+    //     { name: 'Lost', value: mbti['features']['total_losses'] },
+    // ];
+      const data = [
+        { name: 'Won', value: 45 },
+        { name: 'Lost', value: 60 },
     ];
+
 
     const COLORS = ['#00B9BF', '#FF5F4E']; // Customize as needed
     const RADIAN = Math.PI / 180;
@@ -51,7 +61,7 @@ export default function Dashboard() {
                 <div className="flex flex-col gap-2 p-2 text-white">
                     <div className="flex items-center gap-3">
                         <div className="w-1.5 h-1.5 rounded-full bg-white" />
-                        <div className="font-bold ">ENFP</div>
+                        <div className="font-bold ">{mbti['result']['response']['mbti']}</div>
                     </div>
                     <div className="flex items-center gap-6 text-5xl">
                         <div>summoner</div>
@@ -70,7 +80,7 @@ export default function Dashboard() {
                     <div className="bg-[var(--dark)] text-white col-span-2 p-8 rounded-lg">
                         <div className="text-lg mb-2">Total Matches</div>
                         <div className="flex h-full justify-between items-center">
-                            <div className="text-3xl lg:text-7xl">205</div>
+                            <div className="text-3xl lg:text-7xl">{mbti['features']['total_matches']}</div>
                             <PieChart width={300} height={200} responsive>
                                 <Legend layout="vertical" verticalAlign="middle" align="left" />
                                 <Pie
@@ -92,32 +102,32 @@ export default function Dashboard() {
                         <div className="text-lg mb-2">Most Played Champion:</div>
                         <div className="h-full flex flex-col items-center gap-3 justify-center">
                             <Image src="https://github.com/shadcn.png" alt="@shadcn" className="border-2 border-[var(--light)] rounded-lg" width={120} height={120}/>
-                            <div className="font-bold">Suit Guy</div>
-                            <div className="text-sm">you played <span className="text-lg">123</span> matches together!</div>
+                            <div className="font-bold">{mbti['features']['most_played_champ']}</div>
+                            <div className="text-sm">you played <span className="text-lg">{mbti['features']['champion_frequency'][mbti['features']['most_played_champ']]}</span> matches together!</div>
                         </div>
                     </div>
                     <div className="bg-[var(--dark)] text-white p-8 rounded-lg">
                         <div className="text-lg mb-2">Most Played Role:</div>
                         <div className="h-full flex flex-col items-center gap-3 justify-center">
                             <Image src="https://github.com/shadcn.png" alt="@shadcn" className="border-2 border-[var(--light)] rounded-lg" width={120} height={120}/>
-                            <div className="font-bold">Support</div>
+                            <div className="font-bold">{mbti['features']['most_played_role']}</div>
                             <div className="text-sm">{"<insert sentence about the role!>"}</div>
                         </div>
                     </div>
                     <div className="grid grid-cols-1 grid-rows-2 gap-2">
                         <div className="bg-[var(--dark)] text-white p-8 rounded-lg">
                             <div className="text-lg mb-2">Total Kill Participation:</div>
-                            <div className="text-5xl">{45}%</div>
+                            <div className="text-5xl">{(mbti['features']['avg_kill_participation'] * 100).toFixed(2)}%</div>
                         </div>
                         <div className="bg-[var(--dark)] text-white p-8 rounded-lg">
                             <div className="text-lg mb-2">Total Damage:</div>
-                            <div className="text-5xl">{184056}</div>
+                            <div className="text-5xl">{mbti['features']['extra_data']['total_damage_dealt'] + mbti['features']['extra_data']['total_structure_damage']}</div>
                         </div>
                     </div>
                     <div className="col-span-3 bg-[var(--dark)] text-white p-8 rounded-lg">
                         <div className="text-lg mb-2">Total Kills:</div>
                         <div className="flex justify-between">
-                            <div className="text-3xl">{54}</div>
+                            <div className="text-3xl">{mbti['features']['extra_data']['total_kills']}</div>
                             <div className="text-right">
                                 <div className="text-sm">
                                     you were on a roll during
@@ -140,7 +150,7 @@ export default function Dashboard() {
                 <div className="grid grid-cols-3 gap-2">
                     <div className="bg-[var(--dark)] text-white text-lg gap-4 p-8 rounded-lg flex flex-col justify-center items-center">
                         <div>Total Pings:</div>
-                        <div>182</div>
+                        <div>{mbti['features']['avg_pings'] * mbti['features']['total_matches']}</div>
                     </div>
                     <div className="bg-[var(--dark)] text-white text-lg gap-4 p-8 rounded-lg flex flex-col justify-center items-center">
                         <div>Total Stolen Objectives:</div>
