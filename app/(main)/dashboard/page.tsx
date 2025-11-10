@@ -62,8 +62,14 @@ export default function Dashboard() {
         <div className={`${tiltNeon.className} p-5 flex flex-col gap-3`}>
             <div className="flex gap-2">
                 <div className="flex flex-col items-center">
-                    <Image src="https://github.com/shadcn.png" alt="@shadcn" className="border-2 border-[var(--light)] rounded-lg" width={120} height={120}/>
-                    <div className="text-white">666</div>
+                    {userData?.profileIconId
+                        ? <Image src={imageService.getProfileImage(userData.profileIconId)} alt="@shadcn" className="border-2 border-[var(--light)] rounded-lg" width={120} height={120}/>
+                        : <Skeleton className="w-[120px] h-[120px] rounded-lg border-2 border-[var(--light)]" />
+                    }
+                    {userData?.summonerLevel
+                        ? <div className="text-white">{userData.summonerLevel}</div>
+                        : <Skeleton className="w-9 h-5" />
+                    }
                 </div>
                 <div className="flex flex-col gap-2 p-2 text-white">
                     <div className="flex items-center gap-3">

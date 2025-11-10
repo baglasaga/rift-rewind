@@ -16,6 +16,7 @@ import {useMBTI} from "@/components/MBTIContext";
 import {useState} from "react";
 import {Spinner} from "@/components/ui/spinner";
 import {Alert, AlertTitle} from "@/components/ui/alert";
+import axios from "axios";
 
 const tiltNeon = Tilt_Neon({ subsets: ['latin'] });
 
@@ -30,20 +31,19 @@ export default function Home() {
     const onSubmit =  async (data: LoginFormData) => {
         setLoading(true);
         try {
-            const res = await dataService.getUser(data.gameName, data.tagLine);
+            const [res] = await Promise.all([dataService.getUser(data.gameName, data.tagLine), getAllUserData(data.gameName, data.tagLine)])
             if (res.batch_id && res.puuid) {
                 startDataFetch(res.batch_id, res.puuid);
                 setLoading(false);
                 setLoginError(null);
-                setUserData({gameName: data.gameName, tagLine: data.tagLine});
                 router.push('/home')
             } else {
                setLoginError('Invalid user. Please try again')
             }
-        } catch (err) {
-            console.error('Max polling attempts or max retry on entry point')
-            setLoginError('Server is not responding. Please try again later.');
+        } catch {
+            setLoginError('Something went wrong. Please try again later.');
         }
+        setLoginError(null);
         setLoading(false);
     }
 
@@ -51,6 +51,17 @@ export default function Home() {
         const userData = await dataService.getUserData(batchId, puuid);
         console.log('setting mbti: ', userData)
         setMbti(userData);
+    }
+
+    const getAllUserData = async (gameName: string, tagLine: string) => {
+        const userRes: any = await axios.get(`/api/user`, {
+            params: {gameName, tagLine}
+        });
+        const profileRes: any = await axios.get(`/api/profile`, {
+            params: {puuid: userRes.data}
+        });
+        const { summonerLevel, profileIconId } = profileRes.data;
+        setUserData({gameName, tagLine, summonerLevel, profileIconId});
     }
 
     return (

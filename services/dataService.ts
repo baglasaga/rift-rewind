@@ -59,7 +59,19 @@ const dataService = {
 
             fetchData();
         })
+    },
 
+    getEncryptedPuuid: async (gameName: string, tagLine: string) => {
+        try {
+            const response = await axios.get(`${ROUTES.ACCOUNT}/${encodeURIComponent(gameName)}/${encodeURIComponent(tagLine)}`, {
+                headers: {
+                    'X-Riot-Token': process.env.RIOT_TOKEN
+                }
+            });
+            return response.data.puuid;
+        } catch {
+            throw new Error('Error getting account.');
+        }
     }
 }
 

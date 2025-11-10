@@ -6,10 +6,11 @@ import Image from "next/image";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {useMBTI} from "@/components/MBTIContext";
 import {Button} from "@/components/ui/button";
+import imageService from "@/services/imageService";
 
 export default function AppSidebar() {
     const pathname = usePathname();
-    const { reset } = useMBTI();
+    const { userData, reset } = useMBTI();
     const router = useRouter();
 
     const sidebarItems = [
@@ -48,7 +49,7 @@ export default function AppSidebar() {
                 })}
             </div>
             <div className="flex justify-center">
-                <Image src="https://github.com/shadcn.png" alt="@shadcn" width={32} height={32} className="rounded-lg" />
+                <Image src={userData?.profileIconId ? imageService.getProfileImage(userData.profileIconId) : "https://github.com/shadcn.png"} alt="Summoner profile" width={32} height={32} className="rounded-lg"/>
             </div>
         </div>
     )
