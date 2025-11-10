@@ -5,7 +5,7 @@ import {PieChart, Pie, Legend, Cell, PieLabelRenderProps, LineChart, ResponsiveC
 import {Tilt_Neon} from "next/font/google";
 import { useMBTI } from "@/components/MBTIContext";
 import {DynamicIcon} from "lucide-react/dynamic";
-import {ROLES} from "@/constants/role-mapping";
+import {Role, ROLES} from "@/constants/role-mapping";
 
 const tiltNeon = Tilt_Neon({ subsets: ['latin'] });
 
@@ -42,13 +42,13 @@ export default function Dashboard() {
     const kills_each_day = mbti['features']['kills_each_day']
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const monthlyData: Record<string, number> = {};
-    for (const [dateStr, kills] of Object.entries(kills_each_day)) {
-    const date = new Date(dateStr);
-    const monthName = monthNames[date.getMonth()]; // getMonth() is 0-indexed
-    if (!monthlyData[monthName]) {
-        monthlyData[monthName] = 0;
-    }
-    monthlyData[monthName] += kills;
+    for (const [dateStr, kills] of Object.entries(kills_each_day) as [string, number][]) {
+        const date = new Date(dateStr);
+        const monthName = monthNames[date.getMonth()]; // getMonth() is 0-indexed
+        if (!monthlyData[monthName]) {
+            monthlyData[monthName] = 0;
+        }
+        monthlyData[monthName] += kills;
     }
 
     // Convert to array suitable for line chart
@@ -122,10 +122,10 @@ export default function Dashboard() {
                         <div className="text-lg mb-2">Most Played Role:</div>
                         <div className="h-full flex flex-col items-center gap-3 justify-center">
                             <div className="border-2 border-[var(--light)] rounded-lg w-[120px] h-[120px] flex justify-center items-center">
-                                <DynamicIcon name={ROLES[mbti['features']['most_played_role']].icon} size={100} strokeWidth={1} fill={"var(--light)"}/>
+                                <DynamicIcon name={ROLES[mbti['features']['most_played_role'] as Role].icon} size={100} strokeWidth={1} fill={"var(--light)"}/>
                             </div>
                             <div className="font-bold">{mbti['features']['most_played_role']}</div>
-                            <div className="text-sm text-center">{ROLES[mbti['features']['most_played_role']].description}</div>
+                            <div className="text-sm text-center">{ROLES[mbti['features']['most_played_role'] as Role].description}</div>
                         </div>
                     </div>
                     <div className="grid grid-cols-1 grid-rows-2 gap-2">

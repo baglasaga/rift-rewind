@@ -1,4 +1,4 @@
-export const ROLES = {
+export const ROLES: Record<Role, any> = {
     JUNGLE: {
         icon: 'footprints',
         description: 'Always lurking in the fog, they love controlling the map and surprising enemies with ganks.',
@@ -20,3 +20,5 @@ export const ROLES = {
         description: 'The team’s guardian angel — setting vision, saving lives, and making everyone look good.',
     },
 };
+
+export type Role = 'JUNGLE' | 'TOP' | 'MIDDLE' | 'BOTTOM' | 'UTILITY';
