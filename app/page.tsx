@@ -13,6 +13,8 @@ import {LoginFormData, loginSchema} from "@/constants/login-schema";
 import {zodResolver} from "@hookform/resolvers/zod";
 import dataService from "@/services/dataService";
 import {useMBTI} from "@/components/MBTIContext";
+import {useState} from "react";
+import {Spinner} from "@/components/ui/spinner";
 
 const tiltNeon = Tilt_Neon({ subsets: ['latin'] });
 
@@ -20,23 +22,35 @@ export default function Home() {
     const router = useRouter();
     const { setMbti } = useMBTI();
     const { register, handleSubmit } = useForm<LoginFormData>({resolver: zodResolver(loginSchema)});
+    const [ loading, setLoading ] = useState<boolean>(false);
 
 
     const onSubmit =  async (data: LoginFormData) => {
-        const res = await dataService.getUser(data.gameName, data.tagLine);
+        setLoading(true);
         try {
-            const userData = await dataService.getUserData(res.batch_id, res.puuid);
-            console.log('setting mbti: ', userData)
-            setMbti(userData);
+            const res = await dataService.getUser(data.gameName, data.tagLine);
+            startDataFetch(res.batch_id, res.puuid);
+            setLoading(false);
             router.push('/sauce')
         } catch (err) {
-            console.error('polling error probably the game name tagline combo doesnt exist add validation??')
+            console.error('Max polling attempts or max retry on entry point')
         }
+        setLoading(false);
+    }
 
+    const startDataFetch = async (batchId: string, puuid: string) => {
+        const userData = await dataService.getUserData(batchId, puuid);
+        console.log('setting mbti: ', userData)
+        setMbti(userData);
     }
 
     return (
       <div className={"bg-[var(--dark)] min-h-screen"}>
+          {loading &&
+              <div className="fixed inset-0 flex items-center justify-center z-[100]">
+                  <Spinner color="white" className="size-6" />
+              </div>
+          }
         <main className={"min-h-screen w-full flex flex-col items-center justify-center py-32 px-16 space-y-32 text-[var(--text)]"}>
             <div className={`${tiltNeon.className} text-8xl text-center`}>Welcome!</div>
             <Card className={"bg-[var(--dark-2)] border-1 border-[var(--dark-1)] text-[var(--text)]"}>
@@ -68,6 +82,7 @@ export default function Home() {
                                 <Button
                                     type="submit"
                                     className={"bg-[var(--light)] px-4 py-2 rounded-lg hover:cursor-pointer hover:bg-[var(--light)]"}
+                                    disabled={loading}
                                 >
                                     Login
                                     <ArrowRight />

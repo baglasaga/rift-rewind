@@ -2,16 +2,30 @@ import axios from 'axios';
 import {ROUTES} from "@/constants/api-routes";
 
 const dataService = {
-    getUser: async (gameName: string, tagLine: string) => {
-        try {
-            const response = await axios.get(ROUTES.ENTRY_POINT, {
-                params: {gameName, tagLine}
-            });
-            return response.data;
-        } catch (error) {
-            throw error;
+    getUser: async (gameName: string, tagLine: string): Promise<any> => {
+        const maxRetries = 5;
+        let attempt = 0;
+
+        while (attempt < maxRetries) {
+            try {
+                const response = await axios.get(ROUTES.ENTRY_POINT, {
+                    params: { gameName, tagLine },
+                });
+                return response.data;
+            } catch (error: any) {
+                if (axios.isAxiosError(error) && error.response?.status === 429) {
+                    attempt++;
+                    console.warn(`Rate limited. Retrying in 5 seconds... (Attempt ${attempt}/${maxRetries})`);
+                    await new Promise(resolve => setTimeout(resolve, 5000));
+                } else {
+                    throw error;
+                }
+            }
         }
+
+        throw new Error('Max retry attempts reached. Please try again later.');
     },
+
 
     getUserData: async (batchId: string, puuid: string): Promise<any> => {
 
