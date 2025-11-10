@@ -1,12 +1,13 @@
 "use client"
 
-import { MBTI_INFO, MBTI_TYPES, MBTILetter, MBTIType } from "@/constants/mbti";
-import { Slider } from "@/components/ui/slider";
-import { Tilt_Neon } from "next/font/google";
+import {MBTI_INFO, MBTI_TYPES, MBTILetter, MBTIType} from "@/constants/mbti";
+import {Slider} from "@/components/ui/slider";
+import {Tilt_Neon} from "next/font/google";
 import TraitIcon from "@/components/trait-icon";
 import {useMBTI} from "@/components/MBTIContext";
+import {Skeleton} from "@/components/ui/skeleton";
 
-const tiltNeon = Tilt_Neon({ subsets: ['latin'] });
+const tiltNeon = Tilt_Neon({subsets: ['latin']});
 
 type Data = {
     polarity: any
@@ -14,7 +15,7 @@ type Data = {
 }
 
 export default function SauceDetails() {
-    const { mbti } = useMBTI();
+    const {mbti} = useMBTI();
 
     const data: Data = {
         polarity: {
@@ -31,21 +32,29 @@ export default function SauceDetails() {
             <div className="space-y-24">
                 <div className={`${tiltNeon.className} text-[var(--text)] space-y-10`}>
                     <div className="flex gap-3">
-                        {data.type?.split('').map((char, index) => {
-                            const letter = char as MBTILetter;
-                            return (
-                                <div key={letter} className="flex gap-1 items-center">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-[var(--text)]" />
-                                    <div className="leading-tight">{MBTI_INFO[letter].label}</div>
+                        {data.type
+                            ? data.type?.split('').map((char, index) => {
+                                const letter = char as MBTILetter;
+                                return (
+                                    <div key={index} className="flex gap-1 items-center">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-[var(--text)]"/>
+                                        <div className="leading-tight">{MBTI_INFO[letter].label}</div>
+                                    </div>
+                                )
+                            })
+                            : Array.from({ length: 4 }).map((_, index) => (
+                                <div key={index} className="flex gap-1 items-center">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-[var(--text)]"/>
+                                    <Skeleton className="h-2 w-12"/>
                                 </div>
-                            )
-                        })}
+                            ))}
                     </div>
                     <div className="text-9xl">
-                        {data.type}
+                        {data.type ? data.type : <Skeleton className="h-24 w-64"/>
+                        }
                     </div>
                     <div className="text-2xl">
-                        {data?.type && MBTI_TYPES[data.type]?.description ? MBTI_TYPES[data.type].description : 'No description available'}
+                        {data?.type && MBTI_TYPES[data.type]?.description ? MBTI_TYPES[data.type].description : <Skeleton className="w-full h-12" />}
                     </div>
                 </div>
                 <div className="text-[var(--text)] md:px-8 lg:px-16 space-y-8">
@@ -53,7 +62,7 @@ export default function SauceDetails() {
                         <div className={`${tiltNeon.className} text-2xl font-semibold mb-5`}>Analysis:</div>
                         <div className={`${tiltNeon.className} text-2xl font-semibold`}>Overview:</div>
                         <div className="text-xl">
-                            {data?.type && MBTI_TYPES[data.type]?.analysis ? MBTI_TYPES[data.type].analysis : 'No analysis available'}
+                            {data?.type && MBTI_TYPES[data.type]?.analysis ? MBTI_TYPES[data.type].analysis : <Skeleton className="w-full h-48"/>}
                         </div>
                     </div>
                     <div>
@@ -63,7 +72,8 @@ export default function SauceDetails() {
                                 {/* Attitude */}
                                 <div>
                                     <div className={`${tiltNeon.className} text-base`}>
-                                        <span className="font-semibold"> Attitude: </span>  {MBTI_INFO[data.type[0] as MBTILetter].label}
+                                        <span
+                                            className="font-semibold"> Attitude: </span> {MBTI_INFO[data.type[0] as MBTILetter].label}
                                     </div>
                                     <div className="text-sm">
                                         {MBTI_INFO[data.type[0] as MBTILetter].description}
@@ -71,14 +81,15 @@ export default function SauceDetails() {
                                     <div className="grid grid-cols-4">
                                         <div className="text-base font-semibold">Related Traits:</div>
                                         {MBTI_INFO[data.type[0] as MBTILetter].traits.map(name => (
-                                            <TraitIcon name={name} key={name} />
+                                            <TraitIcon name={name} key={name}/>
                                         ))}
                                     </div>
                                 </div>
                                 {/* Function - Perception */}
                                 <div>
                                     <div className={`${tiltNeon.className} text-base`}>
-                                        <span className="font-semibold">Function - Perception:</span> {MBTI_INFO[data.type[1] as MBTILetter].label}
+                                        <span
+                                            className="font-semibold">Function - Perception:</span> {MBTI_INFO[data.type[1] as MBTILetter].label}
                                     </div>
                                     <div className="text-sm">
                                         {MBTI_INFO[data.type[1] as MBTILetter].description}
@@ -86,14 +97,15 @@ export default function SauceDetails() {
                                     <div className="grid grid-cols-4">
                                         <div className="text-base font-semibold">Related Traits:</div>
                                         {MBTI_INFO[data.type[1] as MBTILetter].traits.map(name => (
-                                            <TraitIcon key={name} name={name} />
+                                            <TraitIcon key={name} name={name}/>
                                         ))}
                                     </div>
                                 </div>
                                 {/* Function - Judgement */}
                                 <div>
                                     <div className={`${tiltNeon.className} text-base`}>
-                                        <span className="font-semibold">Function - Judgement:</span> {MBTI_INFO[data.type[2] as MBTILetter].label}
+                                        <span
+                                            className="font-semibold">Function - Judgement:</span> {MBTI_INFO[data.type[2] as MBTILetter].label}
                                     </div>
                                     <div className="text-sm">
                                         {MBTI_INFO[data.type[2] as MBTILetter].description}
@@ -101,14 +113,15 @@ export default function SauceDetails() {
                                     <div className="grid grid-cols-4">
                                         <div className="text-base font-semibold">Related Traits:</div>
                                         {MBTI_INFO[data.type[2] as MBTILetter].traits.map(name => (
-                                            <TraitIcon key={name} name={name} />
+                                            <TraitIcon key={name} name={name}/>
                                         ))}
                                     </div>
                                 </div>
                                 {/* Lifestyle */}
                                 <div>
                                     <div className={`${tiltNeon.className} text-base`}>
-                                        <span className="font-semibold">Lifestyle:</span> {MBTI_INFO[data.type[3] as MBTILetter].label}
+                                        <span
+                                            className="font-semibold">Lifestyle:</span> {MBTI_INFO[data.type[3] as MBTILetter].label}
                                     </div>
                                     <div className="text-sm">
                                         {MBTI_INFO[data.type[3] as MBTILetter].description}
@@ -116,7 +129,7 @@ export default function SauceDetails() {
                                     <div className="grid grid-cols-4">
                                         <div className="text-base font-semibold">Related Traits:</div>
                                         {MBTI_INFO[data.type[3] as MBTILetter].traits.map(name => (
-                                            <TraitIcon key={name} name={name} />
+                                            <TraitIcon key={name} name={name}/>
                                         ))}
                                     </div>
                                 </div>

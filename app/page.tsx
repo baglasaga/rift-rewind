@@ -31,7 +31,7 @@ export default function Home() {
             const res = await dataService.getUser(data.gameName, data.tagLine);
             startDataFetch(res.batch_id, res.puuid);
             setLoading(false);
-            router.push('/sauce')
+            router.push('/home')
         } catch (err) {
             console.error('Max polling attempts or max retry on entry point')
         }

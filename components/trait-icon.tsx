@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { TRAITS } from '@/constants/trait';
+import { TRAITS } from '@/constants/traitType';
 
 type TraitIconProps = {
     name: string

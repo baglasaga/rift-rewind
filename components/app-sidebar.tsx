@@ -1,16 +1,22 @@
-import Link from "next/link";
-import {usePathname} from "next/navigation";
-import {BookOpen, Bot, GalleryVerticalEnd, Settings2, SquareTerminal} from "lucide-react";
+"use client"
+
+import {usePathname, useRouter} from "next/navigation";
+import {GalleryVerticalEnd, Gamepad, Home, LogOut} from "lucide-react";
 import Image from "next/image";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
+import {useMBTI} from "@/components/MBTIContext";
+import {Button} from "@/components/ui/button";
 
 export default function AppSidebar() {
     const pathname = usePathname();
+    const { reset } = useMBTI();
+    const router = useRouter();
+
     const sidebarItems = [
-        {href: '/dashboard', icon: GalleryVerticalEnd},
-        {href: '/sauce/page_1', icon: SquareTerminal},
-        {href: '/sauce/page_2', icon: Bot},
-        {href: '/sauce/page_3', icon: BookOpen},
-        {href: '/', icon: Settings2}
+        {href: '/home', icon: Home, name: 'Home'},
+        {href: '/dashboard', icon: GalleryVerticalEnd, name: 'Dashboard'},
+        {href: '/traits', icon: Gamepad, name: 'Traits'},
+        {href: '/', icon: LogOut, name: 'Logout', onClick: () => {reset()}}
     ]
 
     return (
@@ -19,18 +25,29 @@ export default function AppSidebar() {
                 {sidebarItems.map((item: any, index: number) => {
                     const Icon = item.icon;
                     return (
-                        <Link
-                            key={index}
-                            href={item.href}
-                            className={`rounded-lg p-3
-                            ${(item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)) ? 'bg-[var(--text)] text-neutral-800' :
-                                'bg-transparent text-[var(--text)] hover:bg-[var(--text)] hover:text-neutral-800'}`}>
-                            <Icon className="w-4.5 h-auto" />
-                        </Link>
+                        <Tooltip key={index}>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    onClick={() => {
+                                        if (item.onClick) {
+                                            item.onClick();
+                                        }
+                                        router.push(item.href);
+                                    }}
+                                    className={`rounded-lg p-3
+                                    ${(item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)) ? 'bg-[var(--text)]! text-neutral-800' :
+                                        'bg-transparent text-[var(--text)] hover:bg-[var(--text)] hover:text-neutral-800 hover:cursor-pointer'}`}>
+                                    <Icon className="w-4.5 h-auto" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent side="right">
+                                {item.name}
+                            </TooltipContent>
+                        </Tooltip>
                     )
                 })}
             </div>
-            <div>
+            <div className="flex justify-center">
                 <Image src="https://github.com/shadcn.png" alt="@shadcn" width={32} height={32} className="rounded-lg" />
             </div>
         </div>

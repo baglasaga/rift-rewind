@@ -1,4 +1,4 @@
-export const TRAITS = [
+export const TRAITS: TraitType[] = [
     { name: "Kill Securer", image: "/images/kill-securer.jpg", description: "The opportunistic assassin. You snatch kills with surgical precision and swoop in for stolen assists like a cunning shadow." },
     { name: "The Conqueror", image: "/images/conquer.jpg", description: "The objective crusher. You don’t just fight—you dominate towers, dragons, and barons, leaving a trail of victory in your wake." },
     { name: "Glass Cannon", image: "/images/glass-cannon.jpg", description: "The thrill seeker. High kills, high deaths—you live on the edge, swinging hard but paying the price for your daring plays." },
@@ -17,3 +17,9 @@ export const TRAITS = [
     { name: "Monkey D. Luffy", image: "/images/luffy.jpg", description: "The treasure hunter. You collect bounties like a pirate king, laughing in the face of danger as gold flows into your pocket." },
     { name: "Rage Quitter", image: "/images/rage-quitter.png", description: "The tempest. When things go south, you vanish in a puff of smoke, leaving chaos and slightly tilted teammates behind." },
 ];
+
+export type TraitType = {
+    name: string,
+    image: string,
+    description: string
+}
