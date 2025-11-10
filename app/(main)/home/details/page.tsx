@@ -33,7 +33,7 @@ export default function SauceDetails() {
                 <div className={`${tiltNeon.className} text-[var(--text)] space-y-10`}>
                     <div className="flex gap-3">
                         {data.type
-                            ? data.type?.split('').map((char, index) => {
+                            ? data.type.split('').map((char, index) => {
                                 const letter = char as MBTILetter;
                                 return (
                                     <div key={index} className="flex gap-1 items-center">
@@ -62,7 +62,7 @@ export default function SauceDetails() {
                         <div className={`${tiltNeon.className} text-2xl font-semibold mb-5`}>Analysis:</div>
                         <div className={`${tiltNeon.className} text-2xl font-semibold`}>Overview:</div>
                         <div className="text-xl">
-                            {data?.type && MBTI_TYPES[data.type]?.analysis ? MBTI_TYPES[data.type].analysis : <Skeleton className="w-full h-48"/>}
+                            {data?.type && mbti ? mbti?.result.response.summary : <Skeleton className="w-full h-48"/>}
                         </div>
                     </div>
                     <div>
