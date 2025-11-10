@@ -10,18 +10,12 @@ const tiltNeon = Tilt_Neon({ subsets: ['latin'] });
 
 export default function Dashboard() {
     const { mbti } = useMBTI()
-    // console.log(mbti['features']['total_wins'])
-    // console.log(mbti['features']['total_losses'])
+    console.log(mbti)
 
-    // const data = [
-    //     { name: 'Won', value: mbti['features']['total_wins'] },
-    //     { name: 'Lost', value: mbti['features']['total_losses'] },
-    // ];
-      const data = [
-        { name: 'Won', value: 45 },
-        { name: 'Lost', value: 60 },
+    const data = [
+        { name: 'Won', value: mbti['features']['extra_data']['total_wins'] },
+        { name: 'Lost', value: mbti['features']['extra_data']['total_losses'] },
     ];
-
 
     const COLORS = ['#00B9BF', '#FF5F4E']; // Customize as needed
     const RADIAN = Math.PI / 180;
@@ -42,12 +36,28 @@ export default function Dashboard() {
         );
     };
 
-    const lineChartData = [
-        { month: 'Jan', value: 10 },
-        { month: 'Apr', value: 20 },
-        { month: 'Jul', value: 60 },
-        { month: 'Oct', value: 30 },
-    ];
+    // clankered
+    const kills_each_day = mbti['features']['kills_each_day']
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const monthlyData: Record<string, number> = {};
+    for (const [dateStr, kills] of Object.entries(kills_each_day)) {
+    const date = new Date(dateStr);
+    const monthName = monthNames[date.getMonth()]; // getMonth() is 0-indexed
+    if (!monthlyData[monthName]) {
+        monthlyData[monthName] = 0;
+    }
+    monthlyData[monthName] += kills;
+    }
+
+    // Convert to array suitable for line chart
+    const lineChartData = Object.entries(monthlyData).map(([month, value]) => ({ month, value }));
+
+    // const lineChartData = [
+    //     { month: 'Jan', value: 10 },
+    //     { month: 'Apr', value: 20 },
+    //     { month: 'Jul', value: 60 },
+    //     { month: 'Oct', value: 30 },
+    // ];
 
     const peak = lineChartData.reduce((max, item) => (item.value > max.value ? item : max), lineChartData[0]);
 
