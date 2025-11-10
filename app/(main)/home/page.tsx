@@ -17,7 +17,7 @@ export default function Sauce() {
                     Wanna know your LoL MBTI?
                 </div>
                 <div>
-                    <Button className="hover:cursor-pointer" onClick={() => router.push('/sauce/details')}>
+                    <Button className="hover:cursor-pointer" onClick={() => router.push('/home/details')}>
                         yes sauce me <ArrowRight />
                     </Button>
                 </div>
