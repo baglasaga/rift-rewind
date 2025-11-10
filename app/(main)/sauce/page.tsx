@@ -13,7 +13,7 @@ export default function Sauce() {
     return (
         <div className="w-full h-full flex justify-center items-center">
             <div className="flex flex-col justify-center items-center gap-4 text-[var(--text)]">
-                <div className={`${tiltNeon.className} text-xl`}>
+                <div className={`${tiltNeon.className} text-5xl`}>
                     Wanna know your LoL MBTI?
                 </div>
                 <div>

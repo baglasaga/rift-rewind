@@ -7,10 +7,10 @@ export default function AppSidebar() {
     const pathname = usePathname();
     const sidebarItems = [
         {href: '/dashboard', icon: GalleryVerticalEnd},
-        {href: '/#', icon: SquareTerminal},
-        {href: '/#', icon: Bot},
-        {href: '/#', icon: BookOpen},
-        {href: '/#', icon: Settings2}
+        {href: '/sauce/page_1', icon: SquareTerminal},
+        {href: '/sauce/page_2', icon: Bot},
+        {href: '/sauce/page_3', icon: BookOpen},
+        {href: '/', icon: Settings2}
     ]
 
     return (
@@ -23,7 +23,7 @@ export default function AppSidebar() {
                             key={index}
                             href={item.href}
                             className={`rounded-lg p-3
-                            ${pathname.startsWith(item.href) ? 'bg-[var(--text)] text-neutral-800' : 
+                            ${(item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)) ? 'bg-[var(--text)] text-neutral-800' :
                                 'bg-transparent text-[var(--text)] hover:bg-[var(--text)] hover:text-neutral-800'}`}>
                             <Icon className="w-4.5 h-auto" />
                         </Link>
