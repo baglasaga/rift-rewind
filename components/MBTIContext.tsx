@@ -7,6 +7,8 @@ type MBTIContextShape = {
     setStarted: (v: boolean) => void;
     mbti: any | null;
     setMbti: (v: any | null) => void;
+    userData: any | null;
+    setUserData: (v: any | null) => void;
     reset: () => void;
 };
 
@@ -40,19 +42,33 @@ export const MBTIProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
         return null;
     });
 
+    const [userData, setUserData] = useState<any | null>(() => {
+        try {
+            const saved = localStorage.getItem(contextKey);
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                return parsed.userData ?? null;
+            }
+        } catch (e) {
+            console.error('Failed to parse context from local storage: ', e);
+        }
+        return null;
+    });
+
 
     const reset = () => {
         setStarted(false);
         setMbti(null);
+        setUserData(null);
         localStorage.removeItem(contextKey);
     };
 
     useEffect(() => {
-        const payload = JSON.stringify({ started, mbti });
+        const payload = JSON.stringify({ started, mbti, userData });
         localStorage.setItem(contextKey, payload);
-    }, [started, mbti]);
+    }, [started, mbti, userData]);
 
-    const value = useMemo(() => ({ started, setStarted, mbti, setMbti, reset }), [started, mbti]);
+    const value = useMemo(() => ({ started, setStarted, mbti, setMbti, userData, setUserData, reset }), [started, mbti, userData]);
 
     return (
         <MBTIContext.Provider value={value}>

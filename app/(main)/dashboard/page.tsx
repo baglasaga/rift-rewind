@@ -13,7 +13,7 @@ const tiltNeon = Tilt_Neon({ subsets: ['latin'] });
 
 
 export default function Dashboard() {
-    const { mbti } = useMBTI()
+    const { mbti, userData } = useMBTI()
     console.log(mbti)
 
     const data = [
@@ -57,6 +57,7 @@ export default function Dashboard() {
     const lineChartData = Object.entries(monthlyData).map(([month, value]) => ({ month, value }));
     const peak = lineChartData.reduce((max, item) => (item.value > max.value ? item : max), lineChartData[0]);
 
+    console.log(userData);
     return (
         <div className={`${tiltNeon.className} p-5 flex flex-col gap-3`}>
             <div className="flex gap-2">
@@ -73,8 +74,14 @@ export default function Dashboard() {
                         }
                     </div>
                     <div className="flex items-center gap-6 text-5xl">
-                        <div>summoner</div>
-                        <div className="opacity-50">#tag</div>
+                        {userData
+                            ? <div>{userData.gameName}</div>
+                            : <Skeleton className="h-12 w-36" />
+                        }
+                        {userData
+                            ? <div className="opacity-50">#{userData.tagLine}</div>
+                            : <div className="flex opacity-50">#<Skeleton className="h-12 w-16" /></div>
+                        }
                     </div>
                 </div>
             </div>
